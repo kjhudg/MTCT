@@ -1,0 +1,20 @@
+dead <- function(MomHIVPos, NonHIVDeath, HIVDeath, EarlyTrans, BreastFed, MomOnDrugs, StillTransmit, LateTrans){
+	result <- (MomHIVPos*EarlyTrans*NonHIVDeath) + (MomHIVPos*EarlyTrans*HIVDeath)+ (MomHIVPos*(1-EarlyTrans)*NonHIVDeath) + ((1-MomHIVPos)*NonHIVDeath)
+	return(result)
+}
+
+HIVNeg <- function(MomHIVPos, NonHIVDeath, HIVDeath, EarlyTrans, BreastFed, MomOnDrugs, StillTransmit, LateTrans){	
+	result<-((1-MomHIVPos)*(1-NonHIVDeath)) + (MomHIVPos*(1-EarlyTrans)*(1-BreastFed)*(1-NonHIVDeath)) +(MomHIVPos*(1-EarlyTrans)*BreastFed*(1-NonHIVDeath)*MomOnDrugs*(1-StillTransmit)) +(MomHIVPos*(1-EarlyTrans)*BreastFed*(1-NonHIVDeath)*(1-MomOnDrugs)*(1-LateTrans))
+	return(result)
+}
+
+HIVPos <- function(MomHIVPos, NonHIVDeath, HIVDeath, EarlyTrans, BreastFed, MomOnDrugs, StillTransmit, LateTrans){
+	result<-(MomHIVPos*EarlyTrans*(1-NonHIVDeath)*(1-HIVDeath)) +(MomHIVPos*(1-EarlyTrans)*BreastFed*(1-NonHIVDeath)*MomOnDrugs*(StillTransmit)) +(MomHIVPos*(1-EarlyTrans)*BreastFed*(1-NonHIVDeath)*(1-MomOnDrugs)*(LateTrans))
+	return(result)
+}
+
+dead(MomHIVPos=.177, NonHIVDeath=.0073, HIVDeath=.0453, EarlyTrans=.05, BreastFed=.965, MomOnDrugs=.82, StillTransmit=.021, LateTrans=.07)
+
+HIVNeg(MomHIVPos=.177, NonHIVDeath=.0073, HIVDeath=.0453, EarlyTrans=.05, BreastFed=.965, MomOnDrugs=.82, StillTransmit=.021, LateTrans=.07)
+
+HIVPos(MomHIVPos=.177, NonHIVDeath=.0073, HIVDeath=.0453, EarlyTrans=.05, BreastFed=.965, MomOnDrugs=.82, StillTransmit=.021, LateTrans=.07)
